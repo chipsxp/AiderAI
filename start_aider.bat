@@ -1,5 +1,5 @@
 @echo off
-echo Starting Aider with Agent Communication...
+echo Starting Aider...
 
 :: Path to your virtual environment from system environment variable
 if defined AIDER_PATH (
@@ -24,23 +24,12 @@ if not exist %VENV_PATH%\Scripts\activate.bat (
     pip install pyyaml
     pip install aider-chat
     pip install pytest-playwright
-    pip install watchdog
 ) else (
     call %VENV_PATH%\Scripts\activate.bat
 )
 
-:: Parse command line arguments
-set MODEL=both
-if not "%1"=="" (
-    if "%1"=="gpt-4o" (
-        set MODEL=gpt-4o
-    ) else if "%1"=="sonnet" (
-        set MODEL=sonnet
-    )
-)
-
-:: Run the aider configuration script with the specified model
-python aider_config.py --model %MODEL%
+:: Run the aider configuration script
+python aider_config.py
 
 :: Keep the window open until user presses a key
-pause
+pauses
