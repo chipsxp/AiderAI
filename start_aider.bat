@@ -1,22 +1,35 @@
 @echo off
 echo Starting Aider...
 
-:: Path to your virtual environment - update this to your actual path
-set VENV_PATH=C:\Users\CHIPSXPNFT\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312
+:: Path to your virtual environment from system environment variable
+if defined AIDER_PATH (
+    set VENV_PATH=%AIDER_PATH%
+) else (
+    :: Fallback to a default path if AIDER_PATH is not set
+    set VENV_PATH=%USERPROFILE%\GitHub\AiderAI
+    echo AIDER_PATH environment variable not found. Using default: %VENV_PATH%
+)
+
+:: Create directory if it doesn't exist
+if not exist %VENV_PATH% (
+    echo Creating directory %VENV_PATH%...
+    mkdir %VENV_PATH%
+)
 
 :: Check if virtual environment exists
-if not exist %VENV_PATH% (
+if not exist %VENV_PATH%\Scripts\activate.bat (
     echo Creating virtual environment...
     python -m venv %VENV_PATH%
-    call %VENV_PATH%\Scripts\activate
+    call %VENV_PATH%\Scripts\activate.bat
     pip install pyyaml
     pip install aider-chat
+    pip install pytest-playwright
 ) else (
-    call %VENV_PATH%\Scripts\activate
+    call %VENV_PATH%\Scripts\activate.bat
 )
 
 :: Run the aider configuration script
 python aider_config.py
 
 :: Keep the window open until user presses a key
-pause
+pauses
