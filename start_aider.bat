@@ -32,4 +32,4 @@ if not exist %VENV_PATH%\Scripts\activate.bat (
 python aider_config.py
 
 :: Keep the window open until user presses a key
-pauses
+pause
