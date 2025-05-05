@@ -24,9 +24,15 @@ if not exist %VENV_PATH%\Scripts\activate.bat (
     pip install pyyaml
     pip install aider-chat
     pip install pytest-playwright
+    pip install watchdog
+    pip install pathlib
 ) else (
     call %VENV_PATH%\Scripts\activate.bat
 )
+
+:: Start the agent communication system
+echo Starting agent communication system...
+start python agent_communication.py
 
 :: Run the aider configuration script
 python aider_config.py

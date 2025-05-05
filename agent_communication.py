@@ -131,3 +131,24 @@ def stop_file_watcher(observer):
     if observer:
         observer.stop()
         observer.join()
+
+if __name__ == "__main__":
+    print("Initializing agent communication system...")
+    shared_workspace = SharedWorkspace()
+    print(f"Created directories: {shared_workspace.gpt4o_dir}, {shared_workspace.sonnet_dir}, {shared_workspace.shared_dir}")
+    
+    # Start file watchers for both agents
+    gpt4o_observer = start_file_watcher("gpt-4o")
+    sonnet_observer = start_file_watcher("sonnet")
+    
+    print("Agent communication system is running. Press Ctrl+C to stop.")
+    
+    try:
+        # Keep the script running
+        while True:
+            time.sleep(1)
+    except KeyboardInterrupt:
+        print("Stopping file watchers...")
+        stop_file_watcher(gpt4o_observer)
+        stop_file_watcher(sonnet_observer)
+        print("Agent communication system stopped.")
