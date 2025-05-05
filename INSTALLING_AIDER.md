@@ -17,6 +17,20 @@ Before installing Aider, ensure you have:
 The simplest way to install Aider is using pip:
 
 ```bash
+python -m pip install aider-install
+aider-install
+```
+Install with uv
+You can install aider with uv:
+
+```bash
+python -m pip install uv  # If you need to install uv
+uv tool install --force --python python3.12 aider-chat@latest
+```
+
+### Installation with pip (older versions)
+
+```bash
 pip install aider-chat
 ```
 

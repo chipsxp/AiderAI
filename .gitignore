@@ -1,3 +1,6 @@
 .aider*
 config.yaml
-Lib
+Lib/
+Include/
+Scripts/
+pyvenv.cfg
