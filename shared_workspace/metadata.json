@@ -1,0 +1,22 @@
+{
+  "files": {
+    "README.md": {
+      "owner": "gpt-4o",
+      "last_modified": 1746489998.7120745,
+      "shared_with": [],
+      "status": "shared"
+    },
+    "INSTALLING_AIDER.md": {
+      "owner": "sonnet",
+      "last_modified": 1746488100.926834,
+      "shared_with": [],
+      "status": "shared"
+    },
+    "agent_sonnet.md": {
+      "owner": "gpt-4o",
+      "last_modified": 1746489397.9294922,
+      "shared_with": [],
+      "status": "shared"
+    }
+  }
+}
