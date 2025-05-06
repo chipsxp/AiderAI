@@ -54,4 +54,34 @@ Simply double-click this file to launch Aider with your configured settings.
 ## Notes
 
 - The `config.yaml` file is added to `.gitignore` to prevent accidentally committing your API keys
-- For security, never share your API keys or commit them to public repositories
+- For security, never share your API keys or commit them to public repositories# GPT-4o Agent
+
+This directory contains resources and code for working with OpenAI's GPT-4o model as an agent.
+
+## Overview
+
+GPT-4o is OpenAI's multimodal model that combines vision, audio, and text capabilities. This agent implementation leverages these capabilities to provide enhanced assistance.
+
+## Features
+
+- Text-based interaction with advanced reasoning
+- Image understanding and analysis
+- Audio processing capabilities
+- Efficient response generation
+
+## Usage
+
+[Include usage instructions here]
+
+## Examples
+
+[Include examples here]
+
+## Requirements
+
+- OpenAI API key with access to GPT-4o
+- [List other requirements]
+
+## License
+
+[Include license information]
