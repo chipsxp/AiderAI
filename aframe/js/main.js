@@ -1,52 +1,48 @@
-// Main JavaScript file for A-Frame interactions
+AFRAME.registerComponent('hover-animation', {
+  init: function () {
+    const el = this.el;
 
-document.addEventListener('DOMContentLoaded', function() {
-  console.log('A-Frame VR Experience loaded');
-  
-  // Register a component for interactive objects
-  AFRAME.registerComponent('interactive', {
-    init: function() {
-      let el = this.el;
-      
-      // Change color on hover
-      el.addEventListener('mouseenter', function() {
-        this.setAttribute('color', '#FFFF00');
-      });
-      
-      el.addEventListener('mouseleave', function() {
-        // Restore original color based on shape
-        if (this.tagName === 'A-BOX') {
-          this.setAttribute('color', '#4CC3D9');
-        } else if (this.tagName === 'A-SPHERE') {
-          this.setAttribute('color', '#EF2D5E');
-        } else if (this.tagName === 'A-CYLINDER') {
-          this.setAttribute('color', '#FFC65D');
-        }
-      });
-      
-      // Add animation on click
-      el.addEventListener('click', function() {
-        // Create a random animation
-        const animations = [
-          {property: 'rotation', to: '0 360 0', dur: 2000},
-          {property: 'position', to: this.getAttribute('position').x + ' ' + 
-                                     (parseFloat(this.getAttribute('position').y) + 1) + ' ' + 
-                                     this.getAttribute('position').z, dur: 1000, dir: 'alternate', loop: 2}
-        ];
-        
-        const randomAnim = animations[Math.floor(Math.random() * animations.length)];
-        
-        this.setAttribute('animation', randomAnim);
-      });
-    }
-  });
-  
-  // Add the interactive component to all elements with class "interactive"
-  const scene = document.querySelector('a-scene');
-  scene.addEventListener('loaded', function() {
-    const interactiveEls = document.querySelectorAll('.interactive');
-    interactiveEls.forEach(function(el) {
-      el.setAttribute('interactive', '');
+    // Add raycaster to make the entity interactive
+    el.setAttribute('class', 'interactive');
+
+    el.addEventListener('mouseenter', function () {
+      // Pause the animation when cursor hovers over the model
+      if (el.components.animation) {
+        el.components.animation.pause();
+      }
     });
-  });
+
+    el.addEventListener('mouseleave', function () {
+      // Resume the animation when cursor leaves the model
+      if (el.components.animation) {
+        el.components.animation.play();
+      }
+    });
+  }
+});
+
+// Wait for the scene to be fully loaded
+document.addEventListener('DOMContentLoaded', function () {
+  const scene = document.querySelector('a-scene');
+
+  if (scene.hasLoaded) {
+    setupInteractions();
+  } else {
+    scene.addEventListener('loaded', setupInteractions);
+  }
+
+  function setupInteractions() {
+    // Add the hover-animation component to all animated models
+    const models = document.querySelectorAll('a-gltf-model[animation]');
+
+    models.forEach(model => {
+      model.setAttribute('hover-animation', '');
+    });
+
+    // Update the cursor to only interact with elements that have the 'interactive' class
+    const cursor = document.querySelector('a-cursor');
+    if (cursor) {
+      cursor.setAttribute('raycaster', 'objects: .interactive');
+    }
+  }
 });
