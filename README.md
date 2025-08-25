@@ -1,20 +1,50 @@
-# Aider Configuration Setup
+# Aider Multi-Model Launcher
 
-This repository contains configuration and scripts to easily launch Aider, an AI-powered coding assistant, with your preferred models and settings.
+This repository provides a flexible and easy-to-use setup for running the [Aider](https://github.com/paul-gauthier/aider) AI coding assistant. It allows you to easily switch between different large language models (like GPT-4o and Claude Sonnet) and manage your API keys securely.
 
-## Required Files
+## Features
+
+- **Multi-Model Support**: Easily launch Aider with different AI models.
+- **Centralized Configuration**: A single `config.yaml` file manages all your API keys and settings.
+- **One-Click Start**: A simple batch script for Windows (`start_aider.bat`) automates the entire setup and launch process.
+- **Automatic Environment Setup**: The script handles the creation of a Python virtual environment and installation of dependencies.
+- **Browser-Based UI**: Launches Aider with the web browser interface enabled by default for a richer user experience.
+
+## Prerequisites
+
+- Python 3.8 or higher.
+- Valid API keys for the AI models you intend to use (e.g., OpenAI, Anthropic).
+
+## Setup and Usage
+
+1.  **Clone the Repository**:
+    ```sh
+    git clone <repository_url>
+    cd <repository_name>
+    ```
+
+2.  **Configure API Keys**:
+    Create a `config.yaml` file in the root of the project. You can copy the example below and replace the placeholder values with your actual API keys.
+
+3.  **Launch Aider**:
+    Simply double-click the `start_aider.bat` file. It will:
+    - Create a local Python virtual environment (`.venv`).
+    - Install the necessary dependencies (`PyYAML` and `aider-chat`).
+    - Run the `aider_config.py` script to start Aider with your configuration.
+
+## Project Components
 
 ### config.yaml
 
-This YAML configuration file stores your API keys and settings. **This file is required for the scripts to work properly.**
+This file is the central hub for your API keys and Aider settings. It must be present for the launcher script to work.
 
-Example `config.yaml`:
+**Example `config.yaml`:**
 
 ```yaml
 # API Keys (replace with your actual keys)
 openai-api-key: your_openai_api_key_here
 anthropic-api-key: your_anthropic_api_key_here
-
+ 
 # Settings
 gatherUsageStats: true
 ```
